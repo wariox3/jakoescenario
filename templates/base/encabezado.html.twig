@@ -207,11 +207,6 @@
                     <li>
                         <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
                     </li>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li>
-                            <a role="menuitem" tabindex="-1" href="{{ path('inicio_admin') }}"><i class="fa fa-bars"></i> Admin</a>
-                        </li>
-                    {% endif %}
                     <li>
                         <a role="menuitem" tabindex="-1" href="{{ path('logout') }}"><i class="fa fa-power-off"></i> Logout</a>
                     </li>

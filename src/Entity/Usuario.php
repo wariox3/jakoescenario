@@ -53,9 +53,9 @@ class Usuario implements UserInterface, \Serializable
 	private $token;
 
 	/**
-	 * @ORM\Column(name="codigo_cliente_fk", type="integer", nullable=true)
+	 * @ORM\Column(name="codigo_negocio_fk", type="integer", nullable=true)
 	 */
-	private $codigoClienteFk;
+	private $codigoNegocioFk;
 
 	/**
 	 * @ORM\Column(name="codigo_rol_fk", type="string", length=20, nullable=true)
@@ -67,11 +67,6 @@ class Usuario implements UserInterface, \Serializable
      */
     private $control;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="usuariosClienteRel")
-     * @ORM\JoinColumn(name="codigo_cliente_fk", referencedColumnName="codigo_cliente_pk")
-     */
-    private $clienteRel;
 
 
 	/**
@@ -236,17 +231,17 @@ class Usuario implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getCodigoClienteFk()
+    public function getCodigoNegocioFk()
     {
-        return $this->codigoClienteFk;
+        return $this->codigoNegocioFk;
     }
 
     /**
-     * @param mixed $codigoClienteFk
+     * @param mixed $codigoNegocioFk
      */
-    public function setCodigoClienteFk($codigoClienteFk): void
+    public function setCodigoNegocioFk($codigoNegocioFk): void
     {
-        $this->codigoClienteFk = $codigoClienteFk;
+        $this->codigoNegocioFk = $codigoNegocioFk;
     }
 
     /**
@@ -279,22 +274,6 @@ class Usuario implements UserInterface, \Serializable
     public function setControl($control): void
     {
         $this->control = $control;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getClienteRel()
-    {
-        return $this->clienteRel;
-    }
-
-    /**
-     * @param mixed $clienteRel
-     */
-    public function setClienteRel($clienteRel): void
-    {
-        $this->clienteRel = $clienteRel;
     }
 
 
