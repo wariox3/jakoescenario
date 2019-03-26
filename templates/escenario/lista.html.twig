@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+                    <h2 class="panel-title">Filtro de busqueda</h2>
+                </header>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">Fecha:</label>
+                        <div class="col-sm-5">
+                            {{ form_widget(form.fecha) }}
+                        </div>
+                        <label class="col-sm-1 control-label"></label>
+                        <div class="col-sm-5">
+
+                        </div>
+                    </div>
+                </div>
+                <footer class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                            {{ form_widget(form.btnFiltrar, { 'attr': {'class': 'btn btn-primary', 'style':'float:right'} }) }}
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+        <div class="col-md-12">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        {% for arEscenario in arEscenarios %}
+                            <table width="100%" class="table table-condensed table-bordered tabla-datos">
+                                <tr>
+                                    <td class="titulo">NOMBRE:</td>
+                                    <td class="td-in-well">{{ arEscenario.nombre }}</td>
+                                    <td class="titulo"></td>
+                                    <td class="td-in-well"></td>
+                                    <td class="titulo"></td>
+                                    <td class="td-in-well"></td>
+                                </tr>
+                            </table>
+                            <table class="table table-condensed table-bordered table-hover mb-none">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Inicio</th>
+                                    <th>Fin</th>
+                                    <th>Jugador</th>
+                                    <th>Seudonimo</th>
+                                    <th title="Estado pagado">Pag</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for arReserva in arEscenario.reservas %}
+                                    <tr>
+                                        <td>{{ arReserva.codigo_reserva }}</td>
+                                        <td>{{ arReserva.fecha_desde | date('H:i') }}</td>
+                                        <td>{{ arReserva.fecha_hasta | date('H:i') }}</td>
+                                        <td>{{ arReserva.jugador_nombre_corto | default("") }}</td>
+                                        <td>{{ arReserva.jugador_seudonimo | default("") }}</td>
+                                        <td>{{ arReserva.estado_pagado ? 'SI':'NO' }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <footer class="panel-footer">
+                                <div class="row">
+                                    <div class="col-sm-9 col-sm-offset-3" >
+                                        <div style="float: right; margin-right: 5px !important;" class="btn-group" role="group" aria-label="...">
+                                            <a class="btn btn-sm btn-default"  href="javascript:abrirVentana3('{{ path('escenario_reserva', {'id': arEscenario.codigo_escenario}) }}', 'NuevaReserva', 600, 1200)">Nuevo</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+                            <br /><br />
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
